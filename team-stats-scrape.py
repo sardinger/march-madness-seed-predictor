@@ -7,6 +7,39 @@ import os
 from constants import EXPECTED_TEAM_FIELDS, AP_TOP_25
 import time
 
+# Changes all strings to ints or floats depending on what type of data is stored
+def convert_value(value):
+    if value in ["", "-", "NA", None]:
+        return None
+    
+    # remove commas (attendance numbers)
+    value = value.replace(",", "")
+    
+    try:
+        return int(value)
+    except:
+        pass
+    
+    try:
+        return float(value)
+    except:
+        pass
+    
+    return value
+
+# Changes game_rsult from "W" -> 1, and "L" -> 0
+def convert_game_result(value):
+    if not value:
+        return None
+    
+    v = value.strip().upper()
+    
+    if v.startswith("W"):
+        return 1
+    if v.startswith("L"):
+        return 0
+    
+    return None
 
 def main():
     load_dotenv()
@@ -44,7 +77,7 @@ def main():
 
                     # Validate that we have both name and value
                     if stat_name and stat_value:
-                        stats[stat_name] = stat_value
+                        stats[stat_name] = convert_value(stat_value)
 
                 missing_fields = [
                     field for field in EXPECTED_TEAM_FIELDS if field not in stats

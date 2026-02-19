@@ -39,7 +39,8 @@ EXPECTED_ROLLING_FIELDS = {
     "opp_pts",
     "wins",
     "losses",
-    "game_streak",
+    "game_streak_result",
+    "game_streak_num",
     "arena",
 }
 
@@ -70,3 +71,15 @@ AP_TOP_25 = [
     "louisville",
     "kentucky",
 ]
+
+CONFERENCE_MAP = {
+    "Big Ten": 1,
+    "Big 12": 2,
+    "ACC": 3,
+    "SEC": 4,
+    "Big East": 5,
+    "WCC": 6,
+    "A-10": 7,
+    "MAC": 8,
+    "Sun Belt": 9
+}
