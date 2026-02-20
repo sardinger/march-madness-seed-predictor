@@ -4,42 +4,45 @@ import json
 from dotenv import load_dotenv
 from pymongo import MongoClient
 import os
-from constants import EXPECTED_TEAM_FIELDS, AP_TOP_25
+from constants import EXPECTED_TEAM_FIELDS, AP_TOP_25, TOP_100_CURRENT, WRONG_NAMES_MAP
 import time
+
 
 # Changes all strings to ints or floats depending on what type of data is stored
 def convert_value(value):
     if value in ["", "-", "NA", None]:
         return None
-    
+
     # remove commas (attendance numbers)
     value = value.replace(",", "")
-    
+
     try:
         return int(value)
     except:
         pass
-    
+
     try:
         return float(value)
     except:
         pass
-    
+
     return value
+
 
 # Changes game_rsult from "W" -> 1, and "L" -> 0
 def convert_game_result(value):
     if not value:
         return None
-    
+
     v = value.strip().upper()
-    
+
     if v.startswith("W"):
         return 1
     if v.startswith("L"):
         return 0
-    
+
     return None
+
 
 def main():
     load_dotenv()
@@ -51,13 +54,18 @@ def main():
 
     invalid_teams = []
 
-    for team in AP_TOP_25:
+    for team in TOP_100_CURRENT:
+        if team in WRONG_NAMES_MAP:
+            team = WRONG_NAMES_MAP[team]
+
         url = f"https://www.sports-reference.com/cbb/schools/{team}/men/2026.html"
         try:
             response = requests.get(url)  # TODO: add user agent header to avoid
 
             if response.status_code != 200:
-                invalid_teams.append(team)
+                if response.status_code != 429:
+                    invalid_teams.append(team)
+
                 print(
                     f"{team}: Failed to retrieve data (Status code: {response.status_code})"
                 )

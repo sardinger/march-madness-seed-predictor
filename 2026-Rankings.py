@@ -15,7 +15,7 @@ URL = "https://www.sports-reference.com/cbb/seasons/men/2026-ratings.html"
 DB_NAME = "march-madness"
 COLLECTION_NAME = "season-ratings-2026"
 
-MAX_ROWS: Optional[int] = 100   # set to 25 for top 25
+MAX_ROWS: Optional[int] = 100  # set to 25 for top 25
 
 
 TABLE_ID_CANDIDATES = ["ratings", "schools", "basic_school", "ratings_school"]
@@ -37,6 +37,18 @@ def convert_value(value: Optional[str]) -> Any:
     except ValueError:
         pass
     return v
+
+
+def convert_team_name(name: str) -> str:
+    return (
+        name.lower()
+        .replace(" ", "-")
+        .replace("(", "")
+        .replace(")", "")
+        .replace("'", "")
+        .replace("&", "")
+        .replace(".", "")
+    )
 
 
 def fetch_html(url: str, *, timeout: int = 20) -> str:
@@ -155,21 +167,21 @@ def main() -> None:
     upserted = 0
     replaced = 0
 
+    top_100_li = []
     for d in docs:
         school = d.get("school")
         if not school:
             continue
 
-        res = col.replace_one(
-            {"season": d["season"], "school": school},
-            d,
-            upsert=True
-        )
+        top_100_li.append(convert_team_name(school))
+
+        res = col.replace_one({"season": d["season"], "school": school}, d, upsert=True)
         if res.upserted_id is not None:
             upserted += 1
         elif res.matched_count:
             replaced += 1
 
+    print(top_100_li)  # Copy/paste this list into the constants file
     print(f"Done. parsed={len(docs)} upserted={upserted} replaced={replaced}")
 
 
