@@ -9,6 +9,7 @@ import requests
 from bs4 import BeautifulSoup, Comment
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from utils import convert_team_name
 
 
 URL = "https://www.sports-reference.com/cbb/seasons/men/2026-ratings.html"
@@ -37,18 +38,6 @@ def convert_value(value: Optional[str]) -> Any:
     except ValueError:
         pass
     return v
-
-
-def convert_team_name(name: str) -> str:
-    return (
-        name.lower()
-        .replace(" ", "-")
-        .replace("(", "")
-        .replace(")", "")
-        .replace("'", "")
-        .replace("&", "")
-        .replace(".", "")
-    )
 
 
 def fetch_html(url: str, *, timeout: int = 20) -> str:

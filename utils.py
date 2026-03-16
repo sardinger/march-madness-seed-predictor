@@ -1,3 +1,6 @@
+from constants import WRONG_NAMES_MAP
+
+
 def get_game_rows(games, n=10):
     """Helper function to get the game rows from the schedule page.
 
@@ -23,3 +26,19 @@ def get_game_rows(games, n=10):
         game_rows.append(game)
 
     return game_rows
+
+
+def convert_team_name(name: str) -> str:
+    name = (
+        name.lower()
+        .replace(" ", "-")
+        .replace("(", "")
+        .replace(")", "")
+        .replace("'", "")
+        .replace("&", "")
+        .replace(".", "")
+    )
+
+    if name in WRONG_NAMES_MAP:
+        name = WRONG_NAMES_MAP[name]
+    return name

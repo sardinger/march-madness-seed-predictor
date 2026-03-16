@@ -94,8 +94,6 @@ def main():
                 if missing_fields:
                     print(f"Warning: Missing fields: {missing_fields}")
 
-                # TODO: convert numeric fields to int or float
-
                 # print(json.dumps(stats, indent=2))
 
                 container.insert_one(stats)
