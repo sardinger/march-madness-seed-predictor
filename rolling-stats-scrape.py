@@ -10,6 +10,7 @@ from constants import (
     CONFERENCE_MAP,
     TOP_100_CURRENT,
     WRONG_NAMES_MAP,
+    TEAMS_IN_MM,
 )
 import time
 from utils import get_game_rows
@@ -85,11 +86,11 @@ def main():
     client = MongoClient(uri)
 
     db = client["march-madness"]
-    container = db["rolling-stats"]
+    container = db["rolling-stats-5-games"]
 
     invalid_teams = []
 
-    for team in TOP_100_CURRENT:
+    for team in TEAMS_IN_MM:
         if team in WRONG_NAMES_MAP:
             team = WRONG_NAMES_MAP[team]
 
@@ -110,7 +111,7 @@ def main():
 
                 results_table = soup.find("table", {"id": "schedule"})
                 games = results_table.find_all("tr")[1:]  # skip the table header
-                rolling_games = get_game_rows(games)
+                rolling_games = get_game_rows(games, 5)
 
                 # iterate thru each game and extract td stats
                 for game in rolling_games:

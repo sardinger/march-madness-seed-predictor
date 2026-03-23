@@ -4,7 +4,10 @@ import json
 from dotenv import load_dotenv
 from pymongo import MongoClient
 import os
-from constants import EXPECTED_TEAM_FIELDS, AP_TOP_25, TOP_100_CURRENT, WRONG_NAMES_MAP
+from constants import (
+    EXPECTED_TEAM_FIELDS,
+    WRONG_NAMES_MAP,
+)
 import time
 
 
@@ -50,11 +53,19 @@ def main():
     client = MongoClient(uri)
 
     db = client["march-madness"]
-    container = db["team-stats"]
+    container = db["team-stats-2"]
 
     invalid_teams = []
 
-    for team in TOP_100_CURRENT:
+    missing_teams = [
+        "long-island-university",
+        "mcneese-state",
+        "pennsylvania",
+        "prairie-view",
+        "maryland-baltimore-county",
+    ]
+
+    for team in missing_teams:
         if team in WRONG_NAMES_MAP:
             team = WRONG_NAMES_MAP[team]
 

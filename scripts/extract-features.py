@@ -26,7 +26,7 @@ def main():
     client = MongoClient(uri)
 
     db = client["march-madness"]
-    container = db["team-stats"]
+    container = db["team-stats-2"]
 
     cursor = container.find(
         {},
@@ -86,7 +86,7 @@ def main():
 
     print(df.head())
 
-    container = db["rolling-stats"]
+    container = db["rolling-stats-5-games"]
     cursor = container.find(
         {},
         {
@@ -102,9 +102,8 @@ def main():
     df_rolling = pd.DataFrame(list(cursor))
 
     # Convert game location to 0 for away game and 1 for home
-    # TODO: what about neutral?
     df_rolling["game_location"] = df_rolling["game_location"].apply(
-        lambda x: 0 if x == "@" else 1
+        lambda x: 0 if x in ("@", "N") else 1
     )
 
     df_rolling = (

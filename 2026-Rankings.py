@@ -10,13 +10,14 @@ from bs4 import BeautifulSoup, Comment
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from utils import convert_team_name
+from constants import TEAMS_IN_MM
 
 
 URL = "https://www.sports-reference.com/cbb/seasons/men/2026-ratings.html"
 DB_NAME = "march-madness"
 COLLECTION_NAME = "season-ratings-2026"
 
-MAX_ROWS: Optional[int] = 100  # set to 25 for top 25
+MAX_ROWS: Optional[int] = 290  # set to 25 for top 25
 
 
 TABLE_ID_CANDIDATES = ["ratings", "schools", "basic_school", "ratings_school"]
@@ -157,12 +158,21 @@ def main() -> None:
     replaced = 0
 
     top_100_li = []
+    num_in_top_100 = 0
+
     for d in docs:
         school = d.get("school")
         if not school:
             continue
 
-        top_100_li.append(convert_team_name(school))
+        converted = convert_team_name(school)
+        if converted not in TEAMS_IN_MM:
+            print(f"{converted} not in MM")
+            continue
+        else:
+            num_in_top_100 += 1
+
+        top_100_li.append(converted)
 
         res = col.replace_one({"season": d["season"], "school": school}, d, upsert=True)
         if res.upserted_id is not None:
@@ -170,6 +180,7 @@ def main() -> None:
         elif res.matched_count:
             replaced += 1
 
+    print(num_in_top_100)
     print(top_100_li)  # Copy/paste this list into the constants file
     print(f"Done. parsed={len(docs)} upserted={upserted} replaced={replaced}")
 
