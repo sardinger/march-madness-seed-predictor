@@ -1,0 +1,9 @@
+bs4
+requests
+pymongo
+python-dotenv
+pandas
+matplotlib
+seaborn
+numpy
+scikit-learn
