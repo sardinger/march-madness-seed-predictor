@@ -1,0 +1,7 @@
+bs4
+requests
+pymongo
+dotenv
+pandas
+matplotlib
+seaborn
