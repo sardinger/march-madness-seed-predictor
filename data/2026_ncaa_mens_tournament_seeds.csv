@@ -1,0 +1,69 @@
+team,region,regional_seed,overall_seed,first_four
+Duke,East,1,1,False
+UConn,East,2,6,False
+Michigan State,East,3,9,False
+Kansas,East,4,15,False
+St. John's,East,5,18,False
+Louisville,East,6,23,False
+UCLA,East,7,28,False
+Ohio State,East,8,31,False
+TCU,East,9,34,False
+UCF,East,10,38,False
+South Florida,East,11,46,False
+Northern Iowa,East,12,49,False
+California Baptist,East,13,51,False
+North Dakota State,East,14,55,False
+Furman,East,15,61,False
+Siena,East,16,63,False
+Arizona,West,1,2,False
+Purdue,West,2,8,False
+Gonzaga,West,3,11,False
+Arkansas,West,4,16,False
+Wisconsin,West,5,20,False
+BYU,West,6,24,False
+Miami (FL),West,7,27,False
+Villanova,West,8,30,False
+Utah State,West,9,33,False
+Missouri,West,10,39,False
+NC State,West,11,41,True
+Texas,West,11,42,True
+High Point,West,12,50,False
+Hawaii,West,13,54,False
+Kennesaw State,West,14,58,False
+Queens,West,15,62,False
+LIU,West,16,64,False
+Florida,South,1,4,False
+Houston,South,2,5,False
+Illinois,South,3,10,False
+Nebraska,South,4,13,False
+Vanderbilt,South,5,17,False
+North Carolina,South,6,22,False
+Saint Mary's,South,7,26,False
+Clemson,South,8,29,False
+Iowa,South,9,36,False
+Texas A&M,South,10,40,False
+VCU,South,11,45,False
+McNeese,South,12,47,False
+Troy,South,13,53,False
+Penn,South,14,56,False
+Idaho,South,15,60,False
+Lehigh,South,16,67,True
+Prairie View A&M,South,16,68,True
+Michigan,Midwest,1,3,False
+Iowa State,Midwest,2,7,False
+Virginia,Midwest,3,12,False
+Alabama,Midwest,4,14,False
+Texas Tech,Midwest,5,19,False
+Tennessee,Midwest,6,21,False
+Kentucky,Midwest,7,25,False
+Georgia,Midwest,8,32,False
+Saint Louis,Midwest,9,35,False
+Santa Clara,Midwest,10,37,False
+SMU,Midwest,11,43,True
+Miami (OH),Midwest,11,44,True
+Akron,Midwest,12,48,False
+Hofstra,Midwest,13,52,False
+Wright State,Midwest,14,57,False
+Tennessee State,Midwest,15,59,False
+Howard,Midwest,16,65,True
+UMBC,Midwest,16,66,True

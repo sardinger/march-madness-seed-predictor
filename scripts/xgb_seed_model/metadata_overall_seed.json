@@ -1,0 +1,18 @@
+{
+  "target": "overall_seed",
+  "best_params": {
+    "colsample_bytree": 0.8,
+    "learning_rate": 0.05,
+    "max_depth": 3,
+    "n_estimators": 200,
+    "reg_alpha": 0.0,
+    "reg_lambda": 0.5,
+    "subsample": 0.8
+  },
+  "best_cv_mae": 4.020024019588123,
+  "test_mae": 3.793291585786002,
+  "test_exact_accuracy": 0.0,
+  "test_within_one_accuracy": 0.07142857142857142,
+  "num_rows": 68,
+  "num_features": 28
+}
