@@ -1,6 +1,6 @@
 """
-Predicts tournament seeds (1–16) from team stats.
-Seed distribution: 4 teams per seed 1–10, 6 teams for seed 11, 6 teams for seed 16.
+Predicts tournament seeds (1-16) from team stats.
+Seed distribution: 4 teams per seed 1-10 and 12-15. 6 teams for seed 11, 6 teams for seed 16.
 
 Usage:
     python seed_predictor.py --data your_data.csv
@@ -20,9 +20,9 @@ from sklearn.impute import SimpleImputer
 warnings.filterwarnings("ignore")
 
 # ── Seed distribution ──────────────────────────────────────────────────────────
-# Seeds 1–10: 4 teams each = 40 teams
+# Seeds 1-10: 4 teams each = 40 teams
 # Seed 11:    6 teams
-# Seeds 12–15: 4 teams each = 16 teams
+# Seeds 12-15: 4 teams each = 16 teams
 # Seed 16:    6 teams
 # Total: 40 + 6 + 16 + 6 = 68 teams
 SEED_COUNTS = {
